@@ -23,10 +23,64 @@ struct general
 	int numLibrerias;
 	int dias;
 	int* scores = new int[MAX2];
+	int* scoresSort = new int[MAX2];
 	bool* taken = new bool[MAX2];
 	libreria* libs = new libreria[MAX2];
 	int* selectedBooks = new int[MAX2];
 };
+
+
+void swapScore(int* a, int* b)  
+{  
+    int t = *a;  
+    *a = *b;  
+    *b = t;  
+}  
+  
+/* This function takes last element as pivot, places  
+the pivot element at its correct position in sorted  
+array, and places all smaller (smaller than pivot)  
+to left of pivot and all greater elements to right  
+of pivot */
+int partitionScore (int arr[], int low, int high)  
+{  
+    int pivot = arr[high]; // pivot  
+    int i = (low - 1); // Index of smaller element  
+  
+    for (int j = low; j <= high - 1; j++)  
+    {  
+        // If current element is smaller than the pivot  
+        if (arr[j] < pivot)  
+        {  
+            i++; // increment index of smaller element  
+            swapScore(&arr[i], &arr[j]);  
+        }  
+    }  
+    swapScore(&arr[i + 1], &arr[high]);  
+    return (i + 1);  
+}  
+  
+/* The main function that implements QuickSort  
+arr[] --> Array to be sorted,  
+low --> Starting index,  
+high --> Ending index */
+void quickSortScore(int arr[], int low, int high)  
+{  
+    if (low < high)  
+    {  
+        /* pi is partitioning index, arr[p] is now  
+        at right place */
+        int pi = partitionScore(arr, low, high);  
+  
+        // Separately sort elements before  
+        // partition and after partition  
+        quickSortScore(arr, low, pi - 1);  
+        quickSortScore(arr, pi + 1, high);  
+    }  
+}  
+
+
+
 
 
 void swap(libreria* a, libreria* b)  
@@ -104,6 +158,7 @@ int main()
 	while (i < datos.numLibros)
 	{
 		datos.scores[i] = score;
+		datos.scoresSort[i] = score;
 		i++;
 
 		if (i != datos.numLibros)
@@ -137,6 +192,7 @@ int main()
 		}
 		i++;
 	}
+	quickSortScore(datos.scoresSort, 0, datos.numLibros - 1);
 
 	// Algoritmo
 	// Sort libraries
@@ -181,6 +237,8 @@ int main()
 		i++;
 	}
 
+	int scoreBound = datos.scoresSort[datos.numLibros - totalBooks];
+
 	// Output
 	today = 0;
 	
@@ -198,7 +256,7 @@ int main()
 		int maxBooks = (datos.dias - today) * datos.libs[i].booksPerDay;
 		while (j < datos.libs[i].numeroLibros && booksShipped < maxBooks)
 		{
-			if(!datos.taken[datos.libs[i].libros[j]]){
+			if(!datos.taken[datos.libs[i].libros[j]] && datos.scores[datos.libs[i].libros[j]] >= scoreBound){
 				// if book is not taken
 				datos.selectedBooks[booksShipped] = datos.libs[i].libros[j];
 
