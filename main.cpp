@@ -23,6 +23,7 @@ struct general
 	int* scores = new int[MAX];
 	bool* taken = new bool[MAX];
 	libreria* libs = new libreria[MAX];
+	int* selectedBooks = new int[MAX];
 };
 
 
@@ -127,7 +128,6 @@ int main()
 	datos.dias = atoi(strtok(NULL, delim));
 
 	cin.getline(line,MAX);
-
 	int score = atoi(strtok(line, delim));
 	while (i < datos.numLibros)
 	{
@@ -139,7 +139,6 @@ int main()
 			score = atoi(strtok(NULL, delim));
 		}
 	}
-
 
 	i = 0;
 	while (i < datos.numLibrerias)
@@ -172,7 +171,6 @@ int main()
 	
 	// Output
 	int today = 0;
-	int* selectedBooks = new int[MAX];
 	
 	cout << datos.numLibrerias << endl;
 	i = 0;
@@ -188,7 +186,7 @@ int main()
 		{
 			if(!datos.taken[datos.libs[i].libros[j]]){
 				// if book is not taken
-				selectedBooks[booksShipped] = datos.libs[i].libros[j];
+				datos.selectedBooks[booksShipped] = datos.libs[i].libros[j];
 				booksShipped++;
 				cout << datos.libs[i].libros[j] << flush;
 			}
