@@ -237,7 +237,7 @@ int main()
 		i++;
 	}
 
-	int scoreBound = datos.scoresSort[datos.numLibros - totalBooks];
+	int scoreBound = datos.scoresSort[datos.numLibros / 10];
 
 	// Output
 	today = 0;
@@ -256,7 +256,7 @@ int main()
 		int maxBooks = (datos.dias - today) * datos.libs[i].booksPerDay;
 		while (j < datos.libs[i].numeroLibros && booksShipped < maxBooks)
 		{
-			if(!datos.taken[datos.libs[i].libros[j]] && datos.scores[datos.libs[i].libros[j]] >= scoreBound){
+			if(!datos.taken[datos.libs[i].libros[j]] && (datos.scores[datos.libs[i].libros[j]] >= scoreBound || j < 1)){
 				// if book is not taken
 				datos.selectedBooks[booksShipped] = datos.libs[i].libros[j];
 
