@@ -141,10 +141,11 @@ int main()
 	// Sort libraries
 	quickSort(datos.libs, 0, datos.numLibrerias - 1);
 	
+
+	int actualLibs = 0;
 	// Output
 	int today = 0;
 	
-	cout << datos.numLibrerias << endl;
 	i = 0;
 	int booksShipped;
 	while (i < datos.numLibrerias)
@@ -158,6 +159,45 @@ int main()
 			if(!datos.taken[datos.libs[i].libros[j]]){
 				// if book is not taken
 				datos.selectedBooks[booksShipped] = datos.libs[i].libros[j];
+
+				booksShipped++;
+				datos.taken[datos.libs[i].libros[j]] = true;
+				/*
+				cout << datos.libs[i].libros[j] << flush;
+				if (j < datos.libs[i].numeroLibros - 1 && booksShipped < maxBooks)
+				{
+					cout << " " << flush;
+				}
+				*/
+			}
+			j++;
+
+		}
+		if(booksShipped > 0){
+			actualLibs++;
+		}
+		i++;
+	}
+	actualLibs = i;
+
+
+	// Output
+	today = 0;
+	
+	cout << actualLibs << endl;
+	i = 0;
+	while (i < datos.numLibrerias)
+	{
+		int j = 0;
+		booksShipped = 0;
+		today += datos.libs[i].signup;
+		int maxBooks = (datos.dias - today) * datos.libs[i].booksPerDay;
+		while (j < datos.libs[i].numeroLibros && booksShipped < maxBooks)
+		{
+			if(!datos.taken[datos.libs[i].libros[j]]){
+				// if book is not taken
+				datos.selectedBooks[booksShipped] = datos.libs[i].libros[j];
+
 				booksShipped++;
 				datos.taken[datos.libs[i].libros[j]] = true;
 				/*
@@ -174,7 +214,7 @@ int main()
 		if(booksShipped > 0){
 			cout << datos.libs[i].id << " " << booksShipped << endl;
 			for(int k = 0; k < booksShipped; k++){
-				cout << datos.selectedBooks[booksShipped] << flush;
+				cout << datos.selectedBooks[k] << flush;
 				if(k < booksShipped - 1){
 					cout << " " << flush;
 				}
