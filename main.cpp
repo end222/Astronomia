@@ -190,8 +190,8 @@ int main()
 				// if book is not taken
 				selectedBooks[booksShipped] = datos.libs[i].libros[j];
 				booksShipped++;
+				cout << datos.libs[i].libros[j] << flush;
 			}
-			cout << datos.libs[i].libros[j] << flush;
 			j++;
 			if (j != datos.libs[i].numeroLibros)
 			{
