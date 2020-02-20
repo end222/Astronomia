@@ -119,7 +119,7 @@ int main()
 		datos.libs[i].numeroLibros = atoi(strtok(line, delim));
 		datos.libs[i].signup = atoi(strtok(NULL, delim));
 		datos.libs[i].booksPerDay = atoi(strtok(NULL, delim));
-		datos.libs[i].factor = datos.libs[i].booksPerDay - datos.libs[i].signup;
+		datos.libs[i].factor = - (datos.libs[i].booksPerDay - datos.libs[i].signup);
 
 		int j = 0;
 		cin.getline(line,MAX);
@@ -178,12 +178,14 @@ int main()
 		}
 		i++;
 	}
-	actualLibs = i;
-
 
 	// Output
 	today = 0;
 	
+	for(int i = 0; i < MAX; i++)
+	{
+		datos.taken[i] = false;
+	}
 	cout << actualLibs << endl;
 	i = 0;
 	while (i < datos.numLibrerias)
