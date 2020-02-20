@@ -1,5 +1,6 @@
 all: main.cpp
-	gcc -O3 main.cpp -o main
+	g++ -O3 main.cpp -o main
 
 clean:
 	rm -rf main
+	rm -rf .ma*
