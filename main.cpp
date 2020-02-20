@@ -133,6 +133,8 @@ int main()
 	int score = atoi(strtok(line, delim));
 	while (i < datos.numLibros)
 	{
+		cout << i << endl;
+
 		datos.scores[i] = score;
 		i++;
 
@@ -142,6 +144,7 @@ int main()
 		}
 	}
 
+
 	i = 0;
 	while (i < datos.numLibrerias)
 	{
@@ -150,7 +153,6 @@ int main()
 		datos.libs[i].signup = atoi(strtok(NULL, delim));
 		datos.libs[i].booksPerDay = atoi(strtok(NULL, delim));
 		datos.libs[i].factor = datos.libs[i].booksPerDay - datos.libs[i].signup;
-		cout << " He llegado" << endl;
 
 		int j = 0;
 		cin.getline(line,1000);
@@ -167,7 +169,6 @@ int main()
 		}
 		i++;
 	}
-
 
 	// Algoritmo
 	printArray(datos.libs, datos.numLibrerias);
