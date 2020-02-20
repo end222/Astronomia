@@ -11,7 +11,7 @@ const int MAX = 10000;
 struct libreria
 {
 	int numeroLibros;
-	int libros[MAX];
+	int* libros = new int[MAX];
 	int signup;
 	int booksPerDay;
 	int factor;
@@ -22,9 +22,9 @@ struct general
 	int numLibros;
 	int numLibrerias;
 	int dias;
-	int scores[MAX];
-	bool taken[MAX];
-	libreria libs[MAX];
+	int* scores = new int[MAX];
+	bool* taken = new bool[MAX];
+	libreria* libs = new libreria[MAX];
 };
 
 
@@ -146,7 +146,6 @@ int main()
 	while (i < datos.numLibrerias)
 	{
 		cin.getline(line,1000);
-		cout << "Bucle " << i << endl;
 		datos.libs[i].numeroLibros = atoi(strtok(line, delim));
 		datos.libs[i].signup = atoi(strtok(NULL, delim));
 		datos.libs[i].booksPerDay = atoi(strtok(NULL, delim));
@@ -198,11 +197,18 @@ int main()
 				booksShipped++;
 			}
 			cout << datos.libs[i].libros[j] << flush;
+			j++;
 			if (j != datos.libs[i].numeroLibros)
 			{
 				cout << " " << flush;
 			}
+			else
+			{
+				cout << endl;
+			}
 		}
+		i++;
 	}
 
+	return 0;
 }

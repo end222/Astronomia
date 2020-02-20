@@ -1,5 +1,5 @@
 all: main.cpp
-	g++ main.cpp -o main
+	g++ -std=c++11 main.cpp -o main
 
 clean:
 	rm -rf main
