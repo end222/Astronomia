@@ -287,7 +287,6 @@ int main()
 		}
 		i++;
 	}
-	cout << totalBooks << endl;
 
 	return 0;
 }
