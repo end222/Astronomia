@@ -9,6 +9,7 @@ const int MAX2 = 1000000;
 
 struct libreria
 {
+	int id;
 	int numeroLibros;
 	int* libros = new int[MAX2];
 	int signup;
@@ -114,6 +115,7 @@ int main()
 	while (i < datos.numLibrerias)
 	{
 		cin.getline(line,MAX);
+		datos.libs[i].id = i;
 		datos.libs[i].numeroLibros = atoi(strtok(line, delim));
 		datos.libs[i].signup = atoi(strtok(NULL, delim));
 		datos.libs[i].booksPerDay = atoi(strtok(NULL, delim));
@@ -147,7 +149,6 @@ int main()
 	int booksShipped;
 	while (i < datos.numLibrerias)
 	{
-		cout << i << " " << datos.libs[i].numeroLibros << endl;
 		int j = 0;
 		booksShipped = 0;
 		today += datos.libs[i].signup;
@@ -159,16 +160,29 @@ int main()
 				datos.selectedBooks[booksShipped] = datos.libs[i].libros[j];
 				booksShipped++;
 				datos.taken[datos.libs[i].libros[j]] = true;
+				/*
 				cout << datos.libs[i].libros[j] << flush;
 				if (j < datos.libs[i].numeroLibros - 1 && booksShipped < maxBooks)
 				{
 					cout << " " << flush;
 				}
+				*/
 			}
 			j++;
 
 		}
-		cout << endl;
+		if(booksShipped > 0){
+			cout << datos.libs[i].id << " " << booksShipped << endl;
+			for(int k = 0; k < booksShipped; k++){
+				cout << datos.selectedBooks[booksShipped] << flush;
+				if(k < booksShipped - 1){
+					cout << " " << flush;
+				}
+				else{
+					cout << endl;
+				}
+			}
+		}
 		i++;
 	}
 
