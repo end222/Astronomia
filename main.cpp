@@ -80,6 +80,7 @@ void printArray(libreria arr[], int size)
 int main()
 {
 	general datos;
+	int totalBooks = 0;
 
 	// Put everything to zero so as to avoid errors
 	for(int i = 0; i < MAX; i++)
@@ -161,6 +162,7 @@ int main()
 				datos.selectedBooks[booksShipped] = datos.libs[i].libros[j];
 
 				booksShipped++;
+				totalBooks++;
 				datos.taken[datos.libs[i].libros[j]] = true;
 				/*
 				cout << datos.libs[i].libros[j] << flush;
@@ -227,6 +229,7 @@ int main()
 		}
 		i++;
 	}
+	cout << totalBooks << endl;
 
 	return 0;
 }
