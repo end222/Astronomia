@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int MAX = 10000;
+const int MAX = 1000000;
 
 struct libreria
 {
@@ -35,8 +35,8 @@ int main()
 	}
 	
 	// Se lee la primera linea
-	char line[1000];
-	cin.getline(line,1000);
+	char line[MAX];
+	cin.getline(line,MAX);
 	// El delimitador es un espacio en blanco
 	char delim[] = " ";
 	int i = 0;
@@ -45,7 +45,7 @@ int main()
 	datos.numLibrerias = atoi(strtok(NULL, delim));
 	datos.dias = atoi(strtok(NULL, delim));
 
-	cin.getline(line,1000);
+	cin.getline(line,MAX);
 
 	int score = atoi(strtok(line, delim));
 	while (i < datos.numLibros)
@@ -62,13 +62,13 @@ int main()
 	i = 0;
 	while (i < datos.numLibrerias)
 	{
-		cin.getline(line,1000);
+		cin.getline(line,MAX);
 		datos.libs[i].numeroLibros = atoi(strtok(line, delim));
 		datos.libs[i].signup = atoi(strtok(NULL, delim));
 		datos.libs[i].booksPerDay = atoi(strtok(NULL, delim));
 
 		int j = 0;
-		cin.getline(line,1000);
+		cin.getline(line,MAX);
 		int bookId = atoi(strtok(line, delim));
 		while (j < datos.libs[i].numeroLibros)
 		{
