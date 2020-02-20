@@ -136,7 +136,7 @@ int main()
 		datos.scores[i] = score;
 		i++;
 
-		if (i == datos.numLibros)
+		if (i != datos.numLibros)
 		{
 			score = atoi(strtok(NULL, delim));
 		}
@@ -146,21 +146,52 @@ int main()
 	while (i < datos.numLibrerias)
 	{
 		cin.getline(line,1000);
+		cout << "Bucle " << i << endl;
 		datos.libs[i].numeroLibros = atoi(strtok(line, delim));
 		datos.libs[i].signup = atoi(strtok(NULL, delim));
 		datos.libs[i].booksPerDay = atoi(strtok(NULL, delim));
 		datos.libs[i].factor = datos.libs[i].booksPerDay - datos.libs[i].signup;
+		cout << " He llegado" << endl;
 
 		int j = 0;
+		cin.getline(line,1000);
+		int bookId = atoi(strtok(line, delim));
 		while (j < datos.libs[i].numeroLibros)
 		{
+			datos.libs[i].libros[j] = bookId;
+			j++;
+			
+			if (j != datos.libs[i].numeroLibros)
+			{
+				bookId = atoi(strtok(NULL, delim));
+			}
 		}
+		i++;
 	}
 
+
+	// Algoritmo
 	printArray(datos.libs, datos.numLibrerias);
 	// Sort libraries
 	quickSort(datos.libs, 0, datos.numLibrerias - 1);
 	printArray(datos.libs, datos.numLibrerias);
-
+	
+	// Output
+	
+	cout << datos.numLibrerias << endl;
+	i = 0;
+	while (i < datos.numLibrerias)
+	{
+		cout << i << " " << datos.libs[i].numeroLibros << endl;
+		int j = 0;
+		while (j < datos.libs[i].numeroLibros)
+		{
+			cout << datos.libs[i].libros[j] << flush;
+			if (j != datos.libs[i].numeroLibros)
+			{
+				cout << " " << flush;
+			}
+		}
+	}
 
 }
