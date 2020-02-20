@@ -5,11 +5,12 @@
 using namespace std;
 
 const int MAX = 1000000;
+const int MAX2 = 1000000;
 
 struct libreria
 {
 	int numeroLibros;
-	int* libros = new int[MAX];
+	int* libros = new int[MAX2];
 	int signup;
 	int booksPerDay;
 	int factor;
@@ -20,10 +21,10 @@ struct general
 	int numLibros;
 	int numLibrerias;
 	int dias;
-	int* scores = new int[MAX];
-	bool* taken = new bool[MAX];
-	libreria* libs = new libreria[MAX];
-	int* selectedBooks = new int[MAX];
+	int* scores = new int[MAX2];
+	bool* taken = new bool[MAX2];
+	libreria* libs = new libreria[MAX2];
+	int* selectedBooks = new int[MAX2];
 };
 
 
@@ -75,37 +76,6 @@ void printArray(libreria arr[], int size)
     cout << endl;  
 }  
 
-
-
-/*
-void readInput()
-{
-	// Se lee la primera linea
-	char line[1000];
-	cin.getline(line,1000);
-	// El delimitador es un espacio en blanco
-	char delim[] = " ";
-	int i = 0;
-	int numeroFotos = atoi(strtok(line, delim));
-	while(i < numeroFotos){
-		foto fotoameter;
-		fotoameter.id = i;
-		int j = 0;
-		cin.getline(line,1000);
-		char* orientacion = strtok(line, delim);
-		char trueOrientacion = *orientacion;
-		fotoameter.orientacion = trueOrientacion;
-		int numTags = atoi(strtok(NULL, delim));
-		while(j < numTags){
-			fotoameter.tags.push_back(strtok(NULL,delim));
-			j++;
-		}
-		fotoameter.numTags = j;
-		listaFotos.push_back(fotoameter);
-		i++;
-	}
-}
-*/
 int main()
 {
 	general datos;
@@ -188,18 +158,17 @@ int main()
 				// if book is not taken
 				datos.selectedBooks[booksShipped] = datos.libs[i].libros[j];
 				booksShipped++;
+				datos.taken[datos.libs[i].libros[j]] = true;
 				cout << datos.libs[i].libros[j] << flush;
+				if (j < datos.libs[i].numeroLibros - 1 && booksShipped < maxBooks)
+				{
+					cout << " " << flush;
+				}
 			}
 			j++;
-			if (j != datos.libs[i].numeroLibros)
-			{
-				cout << " " << flush;
-			}
-			else
-			{
-				cout << endl;
-			}
+
 		}
+		cout << endl;
 		i++;
 	}
 
