@@ -177,15 +177,26 @@ int main()
 	printArray(datos.libs, datos.numLibrerias);
 	
 	// Output
+	int today = 0;
+	int* selectedBooks = new int[MAX];
 	
 	cout << datos.numLibrerias << endl;
 	i = 0;
+	int booksShipped;
 	while (i < datos.numLibrerias)
 	{
 		cout << i << " " << datos.libs[i].numeroLibros << endl;
 		int j = 0;
-		while (j < datos.libs[i].numeroLibros)
+		booksShipped = 0;
+		today += datos.libs[i].signup;
+		int maxBooks = (datos.dias - today) * datos.libs[i].booksPerDay;
+		while (j < datos.libs[i].numeroLibros && booksShipped < maxBooks)
 		{
+			if(!datos.taken[datos.libs[i].libros[j]]){
+				// if book is not taken
+				selectedBooks[booksShipped] = datos.libs[i].libros[j];
+				booksShipped++;
+			}
 			cout << datos.libs[i].libros[j] << flush;
 			if (j != datos.libs[i].numeroLibros)
 			{
