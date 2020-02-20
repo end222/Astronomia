@@ -5,6 +5,8 @@
 using namespace std;
 
 const int MAX = 10000;
+ 
+
 
 struct libreria
 {
@@ -12,6 +14,7 @@ struct libreria
 	int libros[MAX];
 	int signup;
 	int booksPerDay;
+	int factor;
 };
 
 struct general
@@ -23,6 +26,58 @@ struct general
 	bool taken[MAX];
 	libreria libs[MAX];
 };
+
+
+void swap(libreria* a, libreria* b)  
+{  
+    libreria t = *a;  
+    *a = *b;  
+    *b = t;  
+}  
+
+int partition (libreria arr[], int low, int high)  
+{  
+    libreria pivot = arr[high]; // pivot  
+    int i = (low - 1); // Index of smaller element  
+  
+    for (int j = low; j <= high - 1; j++)  
+    {  
+        // If current element is smaller than the pivot  
+        if (arr[j].factor < pivot.factor)  
+        {  
+            i++; // increment index of smaller element  
+            swap(&arr[i], &arr[j]);  
+        }  
+    }  
+    swap(&arr[i + 1], &arr[high]);  
+    return (i + 1);  
+}
+
+void quickSort(libreria arr[], int low, int high)  
+{  
+    if (low < high)  
+    {  
+        /* pi is partitioning index, arr[p] is now  
+        at right place */
+        int pi = partition(arr, low, high);  
+  
+        // Separately sort elements before  
+        // partition and after partition  
+        quickSort(arr, low, pi - 1);  
+        quickSort(arr, pi + 1, high);  
+    }  
+}
+
+void printArray(libreria arr[], int size)  
+{  
+    int i;  
+    for (i = 0; i < size; i++)  
+        cout << arr[i].factor << " ";  
+    cout << endl;  
+}  
+
+
+
 /*
 void readInput()
 {
@@ -94,11 +149,18 @@ int main()
 		datos.libs[i].numeroLibros = atoi(strtok(line, delim));
 		datos.libs[i].signup = atoi(strtok(NULL, delim));
 		datos.libs[i].booksPerDay = atoi(strtok(NULL, delim));
+		datos.libs[i].factor = datos.libs[i].booksPerDay - datos.libs[i].signup;
 
 		int j = 0;
 		while (j < datos.libs[i].numeroLibros)
 		{
-
 		}
 	}
+
+	printArray(datos.libs, datos.numLibrerias);
+	// Sort libraries
+	quickSort(datos.libs, 0, datos.numLibrerias - 1);
+	printArray(datos.libs, datos.numLibrerias);
+
+
 }
